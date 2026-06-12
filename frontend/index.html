@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-10">
+  <main class="w-full max-w-md fade-up">
+    <div class="text-center mb-8">
+      <div class="neu-logo mx-auto mb-4" style="width:64px;height:64px;border-radius:22px">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 21s-7.5-4.7-9.8-9A5.6 5.6 0 0 1 12 6.3 5.6 5.6 0 0 1 21.8 12c-2.3 4.3-9.8 9-9.8 9z"/></svg>
+      </div>
+      <h1 class="text-3xl m-0" style="font-weight:900">Mi Registro</h1>
+      <p class="mt-1.5 mb-0 font-bold" style="color:var(--muted)">Tu acompañante en el manejo de la diabetes tipo 2</p>
+    </div>
+
+    <div class="neu-card p-8">
+      <h2 class="text-lg mt-0 mb-5" style="font-weight:900">Iniciar sesión</h2>
+      <form id="login-form" class="space-y-5" novalidate>
+        <label class="block">
+          <span class="neu-label block mb-2">Correo electrónico</span>
+          <input id="email" name="email" type="email" required autocomplete="email" class="neu-input" placeholder="tucorreo@ejemplo.com" />
+        </label>
+        <label class="block">
+          <span class="neu-label block mb-2">Contraseña</span>
+          <input id="password" name="password" type="password" required autocomplete="current-password" class="neu-input" placeholder="••••••••" />
+        </label>
+        <p id="error" class="text-sm font-extrabold hidden m-0" style="color:var(--amber)"></p>
+        <button type="submit" id="submit-btn" class="neu-btn-primary w-full py-3.5 text-base">Entrar</button>
+      </form>
+    </div>
+
+    <p class="text-center mt-6 font-bold" style="color:var(--muted)">
+      ¿No tienes cuenta?
+      <a href="/register.html" class="no-underline font-extrabold" style="color:var(--accent)">Regístrate aquí</a>
+    </p>
+  </main>
+  <script type="module" src="/assets/js/pages/login.js"></script>
+</body>
+</html>

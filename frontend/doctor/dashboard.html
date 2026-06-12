@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pacientes — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen">
+  <div id="app-nav"></div>
+
+  <main class="max-w-6xl mx-auto px-5 py-6 pb-32 sm:pb-16 space-y-6 fade-up">
+    <div>
+      <h1 class="m-0 text-3xl" style="font-weight:900" id="greeting"></h1>
+      <p class="mt-1.5 mb-0 font-bold" style="color:var(--muted);font-size:15.5px" id="today-line"></p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-4 justify-between">
+      <div class="neu-pill-group">
+        <button data-tab="my-patients" class="tab-btn neu-pill active">Mi lista</button>
+        <button data-tab="registered" class="tab-btn neu-pill">
+          Pacientes registrados
+          <span id="registered-count" class="neu-badge" style="display:none"></span>
+        </button>
+      </div>
+      <input id="search" type="search" placeholder="Buscar por nombre…" class="neu-input w-full sm:w-72" style="border-radius:999px" />
+    </div>
+
+    <!-- Panel B: Mi lista -->
+    <section id="tab-my-patients" class="neu-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="neu-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Última adherencia</th>
+              <th>Último dato clínico</th>
+              <th>Sin responder</th>
+            </tr>
+          </thead>
+          <tbody id="my-patients-table"></tbody>
+        </table>
+      </div>
+      <p id="my-patients-empty" class="hidden text-center py-12 m-0 font-bold" style="color:var(--muted)">
+        Aún no tienes pacientes en tu lista. Agrégalos desde "Pacientes registrados".
+      </p>
+    </section>
+
+    <!-- Panel A: Registrados -->
+    <section id="tab-registered" class="hidden neu-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="neu-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Fecha de registro</th>
+              <th>Sexo</th>
+              <th>Etapa de adherencia</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="registered-table"></tbody>
+        </table>
+      </div>
+      <p id="registered-empty" class="hidden text-center py-12 m-0 font-bold" style="color:var(--muted)">
+        No hay pacientes registrados pendientes.
+      </p>
+    </section>
+  </main>
+  <script type="module" src="/assets/js/pages/doctor-dashboard.js"></script>
+</body>
+</html>

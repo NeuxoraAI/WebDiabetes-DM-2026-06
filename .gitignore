@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Configuración y datos locales
+backend/.env
+backend/dm2.db
+backend/test.db
+
+# Material de diseño no versionado
+UX-UI-Propuesta/
+
+# Configuración local de herramientas
+.claude/settings.local.json

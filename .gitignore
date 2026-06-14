@@ -11,6 +11,7 @@ backend/test.db
 
 # Material de diseño no versionado
 UX-UI-Propuesta/
+architecture-design/
 
 # Configuración local de herramientas
 .claude/settings.local.json

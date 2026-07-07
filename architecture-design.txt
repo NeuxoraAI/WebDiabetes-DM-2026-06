@@ -1,0 +1,107 @@
+Nuevas implementaciones de diseño y funcionalidad (Web Diabetes):
+
+-> Agregar la opción para editar tus datos de perfil:
+
+Paciente:
+- Cambiar el nombre
+- Cambiar el correo electrónico
+- Cambiar la contraseña
+- Cambiar la fecha de nacimiento
+- Cambiar el sexo (agregar label tipo "Sexo de nacimiento" para las personas débiles)
+
+Médico:
+- Cambiar el nombre
+- Cambiar el correo electrónico
+- Cambiar la contraseña
+- Cambiar la cédula profesional
+
+-> Agregar un nuevo campo para que el medico pueda agregar mas datos de contacto:
+Direccion de su consultorio, numero de telefono
+
+-> Agregar nuevo campo para el paciente:
+Numero de telefono
+
+-> Para verificacion de contraseña, agregar opcion que diga: Contraseña incorrecta. Vuelva a intentarlo (solo aparece sesión expirada)
+-> Restablecer contraseña (implica manejar correo electronico  !!!)
+
+-> Entorno de publicaciones:
+
+- Habilitar una zona básica de publicaciones en el que el médico pueda realizar "posts" de índole informativo.
+- Implementar una funcionalidad básica para agregar texto, subir archivos multimedia estándar (con tamaño restringido), agregar hipervinculos, etc.
+- El medico es el único capaz de realizar publicaciones y estas publicaciones aparecen a todos sus pacientes registrados (añadir una configuración por si quiere unicamente mostrarlo a ciertos pacientes). El paciente no puede interaccionar con la publicación, únicamente visualizarla y ver/acceder/reproducir el contenido multimedia o acceder a los hipervinculos.
+
+Propuesta de panel HTML:
+
+Publicación (paciente):
+
+- Implementar un nuevo panel HTML al que se acceda por medio de una pestaña llamada "Publicaciones"
+- Cuando hay una nueva publicación, en la pestaña aparece un globo de notificación como en las demás pestañas
+- Al acceder, el paciente puede visualizar todas las publicaciones hechas por su o sus médicos, o bien, aquellas destinadas a él de ser el caso
+- Para una nueva publicación, resaltarla si es la primera vez que se accede a ella. La forma de detectar si el usuario la visualizo, sera directamente cuando accede a la pestaña de publicaciones. Al acceder por primera vez habiendo una publicación nueva, se resaltara. Si el usuario recarga la página o cambia a otra pestaña, se quitara el resaltado y el globo de notificación
+
+Publicación (médico):
+- Implementar un nuevo panel HTML al que se acceda por medio de una pestaña llamada "Publicaciones"
+- Al acceder, el médico podra ver un apartado para crear la nueva publicación, y además, visualizar todas las demás publicaciones que ha hecho en caso de requerir editarlas o eliminarlas
+- Vista similar a la del paciente, unicamente con la funcionalidad de la creación de publicación agregada y sin el resaltado de nuevas publicaciones
+
+-> Calendario:
+
+- Habilitar un calendario que permita gestionar los siguientes eventos, únicamente por parte del médico:
+
+Agendar nuevas citas con el paciente:
+
+Nombre del doctor
+Motivo de la cita
+Nombre del paciente
+Fecha (día de la semana, dia del mes, mes, año, hora en formato 24 hrs)
+Direccion del consultorio
+Notas
+
+Ejemplo:
+
+Cita agendada
+Por: Dr. Juan Pérez López
+Motivo: Revisión ordinaria
+Para: María García Hernández
+Fecha: Lunes, 15/06/2026 17:00 hrs.
+Dirección: Av. Privada #00, Colonia Privada, Ciudad, Estado
+Notas: ninguna
+
+Agendar un nuevo cuestionario, ejemplo:
+
+Cuestionario agendado
+Por: Dr. Juan Pérez López
+Para: María García Hernández
+Fecha: Lunes, 15/06/2026
+
+Agendar un nuevo registro de medición:
+
+Registro de medición agendado
+Por: Dr. Juan Pérez López
+Para: María García Hernández
+Fecha: Lunes, 15/06/2026
+
+- Estos eventos se ven visualizados desde el calendario del médico como del paciente. El médico tiene la capacidad de poder crearlos, editarlos y eliminarlos
+- El paciente unicamente es capaz de visualizarlos en su calendario y abrir el evento. En calendario se muestra el evento y al clickear en el se observan todos los detalles. Ahí, desde el lado del paciente debe haber un opción de Enviar mensaje, para realizar cualquier aclaracion con el medico. Al enviar el mensaje, en el chat debe aparecer desde que evento agendado se esta realizando ese envoi de mensaje, para que el médico pueda tener contexto del evento al que se refiere el paciente, pudiendo dar click en el para dirigirse a los detalles del evento, algo como "Ver en el calendario".
+- De igual forma, desde el lado del médico una opción que diga "Enviar mensaje" para hacer alguna aclaración con el paciente sobre ese evento. De igual forma, en el chat debe aparecer el evento para que el paciente pueda tener contexto Tambien y ver algo similar, "Ver en el calendario", para dirigirse directamente y visualizar los detalles
+
+- Esto implica agregar una pestaña de notificaciones extra (otro HTML), algo como "Eventos o Citas", de modo que si el médico agrega una nueva cita, le llegue una notificación al paciente y pueda acceder desde el nuevo panel al calendario.
+
+Propuesta de nuevo panel HTML:
+
+Eventos (para el paciente):
+
+- Se accede desde una nueva pestaña llamada "Eventos", acompañádo de un icono de calendario
+- Al acceder se visualiza el calendario con los eventos. Y del lado izquierdo, un panel de notificaciones: "Se ha agendado un nuevo evento: <Tipo de evento>   Fecha y hora"
+- Se marca en negritas cuando el usuario no ha accedido a él por primera vez. Al dar clic a la notificación, se abren los detalles del evento (de igual forma como se hace accediendo desde el calendario)
+- Despues de abrir la notifiación por primera vez, se desmarca en negritas pero sigue teniendo la misma funcionalidad, unicamente para avisar que el paciente ya vio el evento.
+- El aviso de notifiación desde el dashboard se hace como con los otros paneles, con un globo de noptifiacion en la pestana correspondiente
+
+Eventos (médico):
+
+- Se accede mediante la lista de registros de pacientes (Mi lista)
+- Al acceder, agregar una pestaña que permita visualizar el calendario con los eventos, y en una esquina, como la superior izquierda, un boton que diga "Crear"
+- En el boton crear permite crear el tipo de evento con los datos requeridos
+- Quiza manejar un solo tipo de evento con todas los opciones disponibles y que algunas sean opcionales y algunas se llenen por default, como el nombre del medico y paciente
+- Se crea el evento, aparece en el calendario.
+- Para el panel izquierdo de notifaciones , debe cambiar para el medico. Dar opcion para filtrar por pacientes y en este caso, ver los eventos creados para ese paciente, similar al panel del paciente solo que aqui no hay resaltado para nuevos eventos. Se ven los eventos creados y al acceder a ellos, se ven los detalles del evento.

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen">
+  <div id="app-nav"></div>
+
+  <main class="max-w-6xl mx-auto px-5 py-6 pb-32 sm:pb-16">
+    <div id="loading" class="text-center py-16 font-bold" style="color:var(--muted)">Cargando…</div>
+
+    <div id="content" class="hidden space-y-7 fade-up">
+      <!-- Saludo -->
+      <div>
+        <h1 class="m-0 text-3xl" style="font-weight:900" id="greeting"></h1>
+        <p class="mt-1.5 mb-0 font-bold" style="color:var(--muted);font-size:15.5px" id="today-line"></p>
+      </div>
+
+      <!-- Banner recordatorio cuestionario (PRD §4.1) -->
+      <div id="due-banner" class="hidden notice-amber p-5 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+        <p class="m-0" id="due-text"></p>
+        <a href="/patient/questionnaire.html" class="neu-btn-primary px-5 py-3 text-center text-sm no-underline shrink-0">
+          Realizar cuestionario ahora
+        </a>
+      </div>
+
+      <!-- Aviso sin médico -->
+      <div id="no-doctor-notice" class="hidden notice-blue p-5">
+        Tu médico aún no ha confirmado tu registro. Podrás enviar mensajes una vez que sea aceptado.
+      </div>
+
+      <!-- Héroe adherencia + tarjetas de estadística -->
+      <section class="grid gap-6 items-stretch" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+        <div class="hero-card p-8 flex items-center justify-between gap-5 flex-wrap">
+          <div style="min-width:200px">
+            <div style="font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85)">Adherencia actual</div>
+            <div style="font-size:52px;font-weight:900;line-height:1.05;margin-top:4px" id="hero-score"></div>
+            <p class="mt-2.5 mb-0" style="font-size:15px;font-weight:700;color:rgba(255,255,255,.93);max-width:340px;line-height:1.45" id="hero-msg"></p>
+          </div>
+          <div id="hero-ring"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-4" id="stat-cards"></div>
+      </section>
+
+      <!-- Gráfica de adherencia -->
+      <section class="neu-card px-7 pt-7 pb-5">
+        <div class="flex items-baseline justify-between gap-4 flex-wrap mb-4">
+          <h2 class="m-0 text-lg" style="font-weight:900">Evolución · Adherencia</h2>
+          <div class="text-sm font-extrabold" style="color:var(--muted)" id="adherence-range"></div>
+        </div>
+        <div class="h-64"><canvas id="adherence-chart"></canvas></div>
+        <p class="mt-4 mb-1 text-sm font-bold" style="color:var(--muted);line-height:1.5">
+          Tu puntaje va de 29 a 145. Pasa el cursor sobre la línea para ver cada cuestionario.
+        </p>
+      </section>
+
+      <!-- Datos clínicos -->
+      <section class="space-y-5">
+        <div>
+          <h2 class="m-0 text-2xl" style="font-weight:900">Mis datos clínicos</h2>
+          <p class="mt-1 mb-0 font-bold" style="color:var(--muted)">Cada dato que anotas ayuda a tu médico a cuidarte mejor.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3" id="metric-chips"></div>
+
+        <div class="grid gap-6 items-start" style="grid-template-columns:repeat(auto-fit,minmax(330px,1fr))">
+          <div class="neu-card px-7 pt-7 pb-5">
+            <div class="flex items-baseline justify-between gap-4 flex-wrap mb-4">
+              <h3 class="m-0 text-base" style="font-weight:900" id="clinical-chart-title">Evolución</h3>
+            </div>
+            <div class="h-56"><canvas id="clinical-chart"></canvas></div>
+            <p id="clinical-chart-empty" class="hidden text-center py-8 m-0 font-bold" style="color:var(--muted)">
+              Aún no hay registros de esta variable.
+            </p>
+          </div>
+
+          <div class="neu-card p-7">
+            <h3 class="m-0 mb-4 text-base" style="font-weight:900">Registrar medición</h3>
+            <form id="clinical-form" class="grid grid-cols-2 gap-4" novalidate>
+              <label class="block">
+                <span class="neu-label block mb-1.5">Peso (kg)</span>
+                <input name="weight" type="number" step="0.1" min="1" max="499" class="neu-input" placeholder="Ej: 79.2" />
+              </label>
+              <label class="block">
+                <span class="neu-label block mb-1.5">Cintura (cm)</span>
+                <input name="waist_cm" type="number" step="0.1" min="1" max="399" class="neu-input" placeholder="Ej: 99.0" />
+              </label>
+              <label class="block">
+                <span class="neu-label block mb-1.5">Estatura (cm)</span>
+                <input name="height_cm" type="number" step="0.1" min="1" max="299" class="neu-input" placeholder="Ej: 165" />
+              </label>
+              <label class="block">
+                <span class="neu-label block mb-1.5">Glucosa (mg/dL)</span>
+                <input name="glucose" type="number" step="0.1" min="1" max="1999" class="neu-input" placeholder="Ej: 118" />
+              </label>
+              <label class="block">
+                <span class="neu-label block mb-1.5">HbA1c (%)</span>
+                <input name="hba1c" type="number" step="0.1" min="0.1" max="29" class="neu-input" placeholder="Ej: 7.1" />
+              </label>
+              <label class="block">
+                <span class="neu-label block mb-1.5">Grasa corporal (%)</span>
+                <input name="body_fat_pct" type="number" step="0.1" min="0.1" max="99" class="neu-input" placeholder="Ej: 27.5" />
+              </label>
+              <label id="gestas-field" class="block hidden">
+                <span class="neu-label block mb-1.5">Gestas (embarazos)</span>
+                <input name="gestas" type="number" step="1" min="0" max="29" class="neu-input" placeholder="Ej: 2" />
+              </label>
+              <div class="col-span-2">
+                <button type="submit" class="neu-btn-green w-full py-3.5 text-base">Guardar registro</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="neu-card p-7">
+          <h3 class="m-0 mb-2 text-base" style="font-weight:900">Historial completo</h3>
+          <div class="overflow-x-auto">
+            <table class="neu-table">
+              <thead>
+                <tr>
+                  <th>Fecha</th><th>Peso</th><th>Cintura</th><th>Estatura</th>
+                  <th>Glucosa</th><th>HbA1c</th><th>Grasa %</th>
+                  <th class="gestas-col hidden">Gestas</th><th>Capturó</th>
+                </tr>
+              </thead>
+              <tbody id="clinical-table"></tbody>
+            </table>
+            <p id="clinical-empty" class="hidden text-center py-6 m-0 font-bold" style="color:var(--muted)">
+              Aún no hay registros clínicos. ¡Anota tu primera medición arriba!
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/assets/js/pages/patient-dashboard.js"></script>
+</body>
+</html>

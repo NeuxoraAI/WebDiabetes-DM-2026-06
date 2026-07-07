@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear cuenta — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-10">
+  <main class="w-full max-w-lg fade-up">
+    <div class="text-center mb-6">
+      <div class="neu-logo mx-auto mb-4" style="width:56px;height:56px;border-radius:20px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 21s-7.5-4.7-9.8-9A5.6 5.6 0 0 1 12 6.3 5.6 5.6 0 0 1 21.8 12c-2.3 4.3-9.8 9-9.8 9z"/></svg>
+      </div>
+      <h1 class="text-2xl m-0" style="font-weight:900">Crear cuenta</h1>
+      <p class="mt-1.5 mb-0 font-bold" style="color:var(--muted)">Empieza tu seguimiento en unos minutos</p>
+    </div>
+
+    <div class="neu-card p-8">
+      <form id="register-form" class="space-y-5" novalidate>
+        <fieldset class="border-none p-0 m-0">
+          <legend class="neu-label mb-2 p-0">Soy:</legend>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="role-option answer-option selected text-center" style="border-radius:18px;padding:13px">
+              <input type="radio" name="role" value="patient" checked class="sr-only" />
+              🧍 Paciente
+            </label>
+            <label class="role-option answer-option text-center" style="border-radius:18px;padding:13px">
+              <input type="radio" name="role" value="doctor" class="sr-only" />
+              🩺 Médico
+            </label>
+          </div>
+        </fieldset>
+
+        <label class="block">
+          <span class="neu-label block mb-2">Nombre y apellidos</span>
+          <input id="full_name" name="full_name" type="text" required minlength="3" class="neu-input" placeholder="Ej: María García López" />
+        </label>
+        <label class="block">
+          <span class="neu-label block mb-2">Correo electrónico</span>
+          <input id="email" name="email" type="email" required autocomplete="email" class="neu-input" placeholder="tucorreo@ejemplo.com" />
+        </label>
+        <label class="block">
+          <span class="neu-label block mb-2">Contraseña <span style="color:var(--muted);font-weight:700">(mínimo 8 caracteres)</span></span>
+          <input id="password" name="password" type="password" required minlength="8" autocomplete="new-password" class="neu-input" placeholder="••••••••" />
+        </label>
+
+        <!-- Campos de paciente -->
+        <div id="patient-fields" class="space-y-5">
+          <label class="block">
+            <span class="neu-label block mb-2">Fecha de nacimiento</span>
+            <input id="birth_date" name="birth_date" type="date" class="neu-input" />
+          </label>
+          <fieldset class="border-none p-0 m-0">
+            <legend class="neu-label mb-2 p-0">Sexo</legend>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="sex-option answer-option text-center" style="border-radius:18px;padding:13px">
+                <input type="radio" name="sex" value="M" class="sr-only" /> Hombre
+              </label>
+              <label class="sex-option answer-option text-center" style="border-radius:18px;padding:13px">
+                <input type="radio" name="sex" value="F" class="sr-only" /> Mujer
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Campos de médico -->
+        <div id="doctor-fields" class="hidden">
+          <label class="block">
+            <span class="neu-label block mb-2">Cédula profesional</span>
+            <input id="cedula" name="cedula" type="text" maxlength="50" class="neu-input" placeholder="Ej: 1234567" />
+          </label>
+        </div>
+
+        <p id="error" class="text-sm font-extrabold hidden m-0" style="color:var(--amber)"></p>
+        <button type="submit" id="submit-btn" class="neu-btn-primary w-full py-3.5 text-base">Crear cuenta</button>
+      </form>
+    </div>
+
+    <p class="text-center mt-6 font-bold" style="color:var(--muted)">
+      ¿Ya tienes cuenta?
+      <a href="/index.html" class="no-underline font-extrabold" style="color:var(--accent)">Inicia sesión</a>
+    </p>
+  </main>
+  <script type="module" src="/assets/js/pages/register.js"></script>
+</body>
+</html>

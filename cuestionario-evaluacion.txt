@@ -1,0 +1,88 @@
+ESCALA DE EVALUACIÓN DE ADHERENCIA AL MANEJO INTEGRAL DE LA DIABETES MELLITUS TIPO II
+
+1. ¿Realiza las pruebas de laboratorio cuando su médico lo indica?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+2. ¿Toma su medicamento incluso si se siente bien?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+3. ¿Asiste a consulta regularmente con su médico?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+4. ¿Se ha hecho examen de orina?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+5. ¿Toma sus medicamentos cuando sale de vacaciones, en días de descanso o festivos?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+6. ¿Usted toma sus medicamentos de acuerdo con las instrucciones del médico?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+7. ¿Toma sus medicamentos, aunque sean caros?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+8. ¿Usted toma sus medicamentos como lo indicó el médico?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+9. ¿Usted come antojitos (enchiladas, tacos, pozole, golosinas, refresco o botana)?
+5. Nunca	4. Rara vez	3. Algunas veces	2. Casi siempre 	1. Siempre
+
+10. ¿Usted come alimentos hechos a base de harinas como: tortilla de harina, pan o pastas?
+5. Nunca	4. Rara vez	3. Algunas veces	2. Casi siempre 	1. Siempre
+
+11. ¿Usted consume alimentos con azúcar?
+5. Nunca	4. Rara vez	3. Algunas veces	2. Casi siempre 	1. Siempre
+
+12. ¿Sus alimentos están preparados con manteca?
+5. Nunca	4. Rara vez	3. Algunas veces	2. Casi siempre 	1. Siempre
+
+13. ¿Usted cambia su dieta con el fin de semana por algún festejo especial?
+5. Nunca	4. Rara vez	3. Algunas veces	2. Casi siempre 	1. Siempre
+
+14. ¿Usted consume diario la misma cantidad de alimentos?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+15. ¿Ha cambiado sus hábitos de alimentación?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+16. ¿En su dieta habitual ha disminuido el consumo de grasas?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+17. ¿Ha dejado de consumir alimentos que contienen azúcar como refrescos, pastelitos y golosinas?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+18. ¿Hace ejercicio físico por lo menos 3 veces por semana, al menos 30 minutos?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+19. ¿Hace ejercicio físico como caminata, bicicleta o natación?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+20. ¿Hace ejercicio físico aún si se siente cansado?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+21. ¿Buscó información sobre la enfermedad y sus complicaciones?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+22. ¿Considera sabrosa la dieta que prescribe el personal de salud?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+23. ¿Usted vigila su peso?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+24. ¿Sus amigos o familiares lo animan a que siga su dieta?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+25. ¿Sus familiares adoptan su alimentación para que usted siga su dieta?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+26. ¿Su familia o amigos le recuerdan su tratamiento para la diabetes?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+27. ¿Revisa sus ojos regularmente?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+28. ¿Revisa sus pies frecuentemente?
+1. Nunca	2.Rara vez	3.Algunas veces		4. Casi siempre		5. Siempre
+
+29. ¿Sus amigos o familiares lo inducen a comer alimentos prohibidos?
+5. Nunca	4. Rara vez	3. Algunas veces	2. Casi siempre 	1. Siempre

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buzón — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen">
+  <div id="app-nav"></div>
+
+  <main class="max-w-3xl mx-auto px-5 py-6 pb-32 sm:pb-16 fade-up">
+    <div class="mb-6">
+      <h1 class="m-0 text-3xl" style="font-weight:900">Buzón</h1>
+      <p class="mt-1.5 mb-0 font-bold" style="color:var(--muted)">Mensajes de tus pacientes pendientes de respuesta, los más antiguos primero.</p>
+    </div>
+    <div id="inbox-list" class="space-y-4"></div>
+    <p id="inbox-empty" class="hidden text-center py-20 m-0 font-bold" style="color:var(--muted)">
+      🎉 No tienes mensajes pendientes de responder.
+    </p>
+  </main>
+  <script type="module" src="/assets/js/pages/inbox.js"></script>
+</body>
+</html>

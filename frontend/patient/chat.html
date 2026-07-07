@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mensajes — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen">
+  <div id="app-nav"></div>
+
+  <main class="max-w-3xl mx-auto px-5 py-6 pb-32 sm:pb-16">
+    <div id="no-doctor-notice" class="hidden notice-blue p-5 mb-5">
+      Tu médico aún no ha confirmado tu registro. Podrás enviar mensajes una vez que sea aceptado.
+    </div>
+
+    <div class="neu-card overflow-hidden fade-up">
+      <div class="flex items-center gap-4 px-6 py-5">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--ink);display:grid;place-items:center;color:#fff;font-weight:900;font-size:16px;box-shadow:5px 5px 12px rgba(163,177,198,.5)" id="doctor-avatar">🩺</div>
+        <div>
+          <div style="font-size:17px;font-weight:900;color:var(--ink)" id="doctor-name">Mi médico</div>
+          <div class="text-sm font-bold" style="color:var(--muted)">Mensajería asíncrona · Te responde en cuanto puede</div>
+        </div>
+      </div>
+
+      <div id="thread" class="neu-inset px-6 py-6 space-y-3.5 overflow-y-auto" style="height:430px;border-radius:0"></div>
+
+      <form id="message-form" class="flex gap-3 px-5 py-4">
+        <input id="message-input" type="text" maxlength="5000" placeholder="Escribe un mensaje a tu médico…"
+          class="neu-input flex-1" style="border-radius:999px;padding:14px 20px" autocomplete="off" />
+        <button type="submit" id="send-btn" class="neu-btn-primary px-7" style="border-radius:999px">Enviar</button>
+      </form>
+    </div>
+  </main>
+  <script type="module" src="/assets/js/pages/patient-chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paciente — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen">
+  <div id="app-nav"></div>
+
+  <main class="max-w-5xl mx-auto px-5 py-6 pb-32 sm:pb-16">
+    <div id="loading" class="text-center py-16 font-bold" style="color:var(--muted)">Cargando…</div>
+
+    <div id="content" class="hidden space-y-6 fade-up">
+      <div class="flex items-center gap-4 flex-wrap">
+        <a href="/doctor/dashboard.html" class="neu-avatar no-underline" title="Volver" style="font-size:20px;text-decoration:none">←</a>
+        <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent-2),var(--accent));display:grid;place-items:center;color:#fff;font-weight:900;font-size:22px;box-shadow:7px 7px 16px rgba(238,83,102,.3)" id="patient-avatar"></div>
+        <div>
+          <h1 class="m-0 text-2xl" style="font-weight:900" id="patient-title"></h1>
+          <p class="mt-0.5 mb-0 text-sm font-bold" style="color:var(--muted)" id="patient-subtitle"></p>
+        </div>
+      </div>
+
+      <!-- Tabs (PRD §5.2) -->
+      <div class="neu-pill-group inline-flex flex-wrap" style="border-radius:28px">
+        <button data-tab="summary" class="tab-btn neu-pill active text-sm">Resumen</button>
+        <button data-tab="adherence" class="tab-btn neu-pill text-sm">Adherencia</button>
+        <button data-tab="clinical" class="tab-btn neu-pill text-sm">Datos clínicos</button>
+        <button data-tab="chat" class="tab-btn neu-pill text-sm">Chat</button>
+      </div>
+
+      <!-- Tab Resumen -->
+      <section id="tab-summary" class="neu-card p-7">
+        <div id="summary-content" class="grid sm:grid-cols-2 gap-x-8" style="grid-auto-rows:min-content"></div>
+        <div id="summary-alerts" class="mt-5 space-y-3"></div>
+      </section>
+
+      <!-- Tab Adherencia -->
+      <section id="tab-adherence" class="hidden neu-card px-7 pt-7 pb-5">
+        <h2 class="m-0 mb-4 text-lg" style="font-weight:900">Historial de adherencia</h2>
+        <div class="h-64 mb-6"><canvas id="adherence-chart"></canvas></div>
+        <table class="neu-table">
+          <thead>
+            <tr><th>Fecha</th><th>Puntaje</th><th>Etapa</th></tr>
+          </thead>
+          <tbody id="adherence-table"></tbody>
+        </table>
+        <p id="adherence-empty" class="hidden text-center py-8 m-0 font-bold" style="color:var(--muted)">
+          El paciente aún no ha respondido cuestionarios.
+        </p>
+      </section>
+
+      <!-- Tab Datos clínicos -->
+      <section id="tab-clinical" class="hidden space-y-5">
+        <div class="neu-card p-7">
+          <h3 class="m-0 mb-4 text-base" style="font-weight:900">Agregar registro</h3>
+          <form id="clinical-form" class="grid grid-cols-2 sm:grid-cols-4 gap-4" novalidate>
+            <label class="block"><span class="neu-label block mb-1.5">Peso (kg)</span>
+              <input name="weight" type="number" step="0.1" min="1" max="499" class="neu-input" /></label>
+            <label class="block"><span class="neu-label block mb-1.5">Cintura (cm)</span>
+              <input name="waist_cm" type="number" step="0.1" min="1" max="399" class="neu-input" /></label>
+            <label class="block"><span class="neu-label block mb-1.5">Estatura (cm)</span>
+              <input name="height_cm" type="number" step="0.1" min="1" max="299" class="neu-input" /></label>
+            <label class="block"><span class="neu-label block mb-1.5">Glucosa (mg/dL)</span>
+              <input name="glucose" type="number" step="0.1" min="1" max="1999" class="neu-input" /></label>
+            <label class="block"><span class="neu-label block mb-1.5">HbA1c (%)</span>
+              <input name="hba1c" type="number" step="0.1" min="0.1" max="29" class="neu-input" /></label>
+            <label class="block"><span class="neu-label block mb-1.5">Grasa corporal (%)</span>
+              <input name="body_fat_pct" type="number" step="0.1" min="0.1" max="99" class="neu-input" /></label>
+            <label id="gestas-field" class="block hidden"><span class="neu-label block mb-1.5">Gestas</span>
+              <input name="gestas" type="number" step="1" min="0" max="29" class="neu-input" /></label>
+            <div class="flex items-end">
+              <button type="submit" class="neu-btn-green w-full py-3 text-sm">Guardar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="flex flex-wrap gap-3" id="metric-chips"></div>
+
+        <div class="neu-card px-7 pt-7 pb-5">
+          <h3 class="m-0 mb-4 text-base" style="font-weight:900" id="clinical-chart-title">Evolución</h3>
+          <div class="h-56"><canvas id="clinical-chart"></canvas></div>
+          <p id="clinical-chart-empty" class="hidden text-center py-8 m-0 font-bold" style="color:var(--muted)">
+            Sin registros de esta variable.
+          </p>
+        </div>
+
+        <div class="neu-card p-7">
+          <h3 class="m-0 mb-2 text-base" style="font-weight:900">Historial completo</h3>
+          <div class="overflow-x-auto">
+            <table class="neu-table">
+              <thead>
+                <tr>
+                  <th>Fecha</th><th>Peso</th><th>Cintura</th><th>Estatura</th>
+                  <th>Glucosa</th><th>HbA1c</th><th>Grasa %</th>
+                  <th class="gestas-col hidden">Gestas</th><th>Capturó</th>
+                </tr>
+              </thead>
+              <tbody id="clinical-table"></tbody>
+            </table>
+            <p id="clinical-empty" class="hidden text-center py-6 m-0 font-bold" style="color:var(--muted)">Sin registros clínicos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab Chat -->
+      <section id="tab-chat" class="hidden neu-card overflow-hidden">
+        <div id="thread" class="neu-inset px-6 py-6 space-y-3.5 overflow-y-auto" style="height:400px;border-radius:30px 30px 0 0"></div>
+        <form id="message-form" class="flex gap-3 px-5 py-4">
+          <input id="message-input" type="text" maxlength="5000" placeholder="Escribe tu respuesta…"
+            class="neu-input flex-1" style="border-radius:999px;padding:14px 20px" autocomplete="off" />
+          <button type="submit" id="send-btn" class="neu-btn-primary px-7" style="border-radius:999px">Enviar</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/assets/js/pages/patient-detail.js"></script>
+</body>
+</html>

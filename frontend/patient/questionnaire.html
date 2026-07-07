@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuestionario — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen">
+  <div id="app-nav"></div>
+
+  <main class="max-w-3xl mx-auto px-5 py-6 pb-32 sm:pb-16">
+    <div id="loading" class="text-center py-16 font-bold" style="color:var(--muted)">Cargando…</div>
+
+    <!-- Pantalla de bienvenida (nuevos usuarios) -->
+    <section id="welcome-screen" class="hidden neu-card p-10 text-center space-y-4 fade-up">
+      <div class="text-5xl">👋</div>
+      <h1 class="text-2xl m-0" style="font-weight:900">¡Bienvenido(a), <span id="welcome-name"></span>!</h1>
+      <p class="max-w-md mx-auto m-0 font-bold" style="color:var(--muted);line-height:1.5">
+        Para comenzar tu seguimiento, responde el cuestionario de adherencia al manejo
+        integral de la diabetes. Te tomará unos minutos.
+      </p>
+      <p class="m-0 font-bold" style="color:var(--body)">Confirma tus datos: <span id="welcome-sex" style="font-weight:900"></span></p>
+      <button id="start-btn" class="neu-btn-primary px-8 py-3.5 text-base">Comenzar cuestionario</button>
+    </section>
+
+    <!-- Cuestionario -->
+    <section id="questionnaire-screen" class="hidden fade-up">
+      <div class="sticky top-0 py-4 z-10" style="background:var(--bg)">
+        <div class="flex justify-between items-baseline gap-3 mb-2">
+          <span class="font-extrabold text-sm" style="color:var(--ink)">Cuestionario de adherencia</span>
+          <span class="font-extrabold text-sm" style="color:var(--muted)" id="progress-text">0 de 29</span>
+        </div>
+        <div class="neu-progress-track">
+          <div class="neu-progress-fill" id="progress-bar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <form id="questionnaire-form" class="space-y-5 mt-4">
+        <div id="questions-container" class="space-y-5"></div>
+        <p id="error" class="text-sm font-extrabold hidden m-0" style="color:var(--amber)"></p>
+        <button type="submit" id="submit-btn" class="neu-btn-primary w-full py-4 text-base">
+          Enviar cuestionario
+        </button>
+        <p class="text-xs text-center pb-6 m-0 font-bold" style="color:var(--muted)">
+          Una vez enviado, el cuestionario no puede editarse.
+        </p>
+      </form>
+    </section>
+
+    <!-- Resultado -->
+    <section id="result-screen" class="hidden space-y-6 fade-up">
+      <div class="hero-card p-10 text-center">
+        <div style="font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85)">Tu resultado</div>
+        <div style="font-size:62px;font-weight:900;line-height:1.05;margin-top:6px" id="result-score"></div>
+        <div style="font-size:15px;font-weight:800;opacity:.85">de 145 puntos</div>
+        <div class="mt-4 flex justify-center" id="result-ring"></div>
+      </div>
+      <div class="neu-card p-8 text-center space-y-3">
+        <div id="result-stage"></div>
+        <p class="max-w-md mx-auto m-0 font-bold" style="color:var(--body);line-height:1.5" id="result-description"></p>
+        <div class="text-sm font-bold space-y-1" style="color:var(--muted)">
+          <p class="m-0">Fecha de realización: <span id="result-date" style="color:var(--ink);font-weight:900"></span></p>
+          <p class="m-0">Próximo cuestionario sugerido: <span id="result-next" style="color:var(--green);font-weight:900"></span></p>
+        </div>
+        <a href="/patient/dashboard.html" class="neu-btn-primary inline-block px-8 py-3.5 text-base no-underline">Ir a mi panel</a>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/assets/js/pages/questionnaire.js"></script>
+</body>
+</html>

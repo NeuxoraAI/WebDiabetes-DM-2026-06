@@ -1,6 +1,8 @@
 import { apiFetch } from "./client.js";
 
 export const getMe = () => apiFetch("/api/patient/me");
+export const updateMe = (data) =>
+  apiFetch("/api/patient/me", { method: "PATCH", body: JSON.stringify(data) });
 export const getQuestions = () => apiFetch("/api/patient/adherence/questions");
 export const getAdherenceHistory = () => apiFetch("/api/patient/adherence");
 export const submitQuestionnaire = (answers) =>

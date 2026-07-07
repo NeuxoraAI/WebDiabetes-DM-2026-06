@@ -13,3 +13,10 @@ export function login(email, password) {
     body: JSON.stringify({ email, password }),
   });
 }
+
+export function changePassword(current_password, new_password) {
+  return apiFetch("/api/auth/change-password", {
+    method: "POST",
+    body: JSON.stringify({ current_password, new_password }),
+  });
+}

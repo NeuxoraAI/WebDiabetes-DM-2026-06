@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil — Mi Registro DM2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/neuro.css" />
+</head>
+<body class="min-h-screen">
+  <div id="app-nav"></div>
+
+  <main class="max-w-2xl mx-auto px-5 py-6 pb-32 sm:pb-16">
+    <div id="loading" class="text-center py-16 font-bold" style="color:var(--muted)">Cargando…</div>
+
+    <div id="content" class="hidden space-y-7 fade-up">
+      <div>
+        <h1 class="m-0 text-3xl" style="font-weight:900">Mi perfil</h1>
+        <p class="mt-1.5 mb-0 font-bold" style="color:var(--muted);font-size:15.5px">Actualiza tus datos personales.</p>
+      </div>
+
+      <!-- Datos personales -->
+      <div class="neu-card p-7">
+        <h2 class="m-0 mb-5 text-lg" style="font-weight:900">Datos personales</h2>
+        <form id="profile-form" class="space-y-5" novalidate>
+          <label class="block">
+            <span class="neu-label block mb-2">Nombre y apellidos</span>
+            <input id="full_name" name="full_name" type="text" required minlength="3" class="neu-input" placeholder="Ej: María García López" />
+          </label>
+          <label class="block">
+            <span class="neu-label block mb-2">Correo electrónico</span>
+            <input id="email" name="email" type="email" required autocomplete="email" class="neu-input" placeholder="tucorreo@ejemplo.com" />
+          </label>
+          <label id="email-confirm" class="block hidden">
+            <span class="neu-label block mb-2">Contraseña actual <span style="color:var(--muted);font-weight:700">(para cambiar el correo)</span></span>
+            <input id="current_password" name="current_password" type="password" autocomplete="current-password" class="neu-input" placeholder="••••••••" />
+          </label>
+          <label class="block">
+            <span class="neu-label block mb-2">Fecha de nacimiento</span>
+            <input id="birth_date" name="birth_date" type="date" required class="neu-input" />
+          </label>
+          <fieldset class="border-none p-0 m-0">
+            <legend class="neu-label mb-2 p-0">Sexo de nacimiento</legend>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="sex-option answer-option text-center" style="border-radius:18px;padding:13px">
+                <input type="radio" name="sex" value="M" class="sr-only" /> Hombre
+              </label>
+              <label class="sex-option answer-option text-center" style="border-radius:18px;padding:13px">
+                <input type="radio" name="sex" value="F" class="sr-only" /> Mujer
+              </label>
+            </div>
+          </fieldset>
+
+          <p id="profile-error" class="text-sm font-extrabold hidden m-0" style="color:var(--amber)"></p>
+          <button type="submit" id="profile-btn" class="neu-btn-primary w-full py-3.5 text-base">Guardar cambios</button>
+        </form>
+      </div>
+
+      <!-- Cambiar contraseña -->
+      <div class="neu-card p-7">
+        <h2 class="m-0 mb-5 text-lg" style="font-weight:900">Cambiar contraseña</h2>
+        <form id="password-form" class="space-y-5" novalidate>
+          <label class="block">
+            <span class="neu-label block mb-2">Contraseña actual</span>
+            <input id="pw_current" name="pw_current" type="password" required autocomplete="current-password" class="neu-input" placeholder="••••••••" />
+          </label>
+          <label class="block">
+            <span class="neu-label block mb-2">Nueva contraseña <span style="color:var(--muted);font-weight:700">(mínimo 8 caracteres)</span></span>
+            <input id="pw_new" name="pw_new" type="password" required minlength="8" autocomplete="new-password" class="neu-input" placeholder="••••••••" />
+          </label>
+
+          <p id="password-error" class="text-sm font-extrabold hidden m-0" style="color:var(--amber)"></p>
+          <button type="submit" id="password-btn" class="neu-btn-green w-full py-3.5 text-base">Actualizar contraseña</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/assets/js/pages/patient-perfil.js"></script>
+</body>
+</html>

@@ -14,6 +14,10 @@ export function getName() {
   return localStorage.getItem(NAME_KEY);
 }
 
+export function setStoredName(name) {
+  localStorage.setItem(NAME_KEY, name);
+}
+
 export function saveSession({ access_token, role, full_name }) {
   localStorage.setItem(TOKEN_KEY, access_token);
   localStorage.setItem(ROLE_KEY, role);

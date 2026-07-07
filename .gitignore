@@ -15,3 +15,6 @@ architecture-design/
 
 # Configuración local de herramientas
 .claude/settings.local.json
+
+# Vercel
+.vercel/

@@ -1,0 +1,3 @@
+# Vercel instala desde la raíz. Reutilizamos las dependencias del backend
+# como única fuente de verdad.
+-r backend/requirements.txt

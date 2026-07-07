@@ -12,6 +12,7 @@ function icon(name, color) {
     inbox: `<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13l3.5 7v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5z"/>`,
     patients: `<circle cx="9" cy="8" r="4"/><path d="M2 21c0-3.9 3.1-6 7-6s7 2.1 7 6"/><path d="M16 11c2.2 0 6 1.1 6 5"/><circle cx="16.5" cy="6.5" r="3"/>`,
     exit: `<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>`,
+    user: `<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/>`,
   };
   return `<svg ${p}>${shapes[name] || ""}</svg>`;
 }
@@ -21,10 +22,12 @@ const NAV_ITEMS = {
     { id: "home", label: "Inicio", href: "/patient/dashboard.html", ic: "home" },
     { id: "quiz", label: "Cuestionario", href: "/patient/questionnaire.html", ic: "quiz" },
     { id: "msg", label: "Mensajes", href: "/patient/chat.html", ic: "msg", badge: true },
+    { id: "perfil", label: "Perfil", href: "/patient/perfil.html", ic: "user" },
   ],
   doctor: [
     { id: "patients", label: "Pacientes", href: "/doctor/dashboard.html", ic: "patients" },
     { id: "inbox", label: "Buzón", href: "/doctor/inbox.html", ic: "inbox", badge: true },
+    { id: "perfil", label: "Perfil", href: "/doctor/perfil.html", ic: "user" },
   ],
 };
 

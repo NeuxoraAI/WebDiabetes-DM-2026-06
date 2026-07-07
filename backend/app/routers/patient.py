@@ -14,7 +14,13 @@ from app.schemas.adherence import (
 from app.schemas.clinical_record import ClinicalRecordCreate, ClinicalRecordOut
 from app.schemas.message import MessageCreate, MessageOut
 from app.schemas.patient import PatientMe
-from app.services import adherence_service, clinical_service, message_service
+from app.schemas.profile import PatientProfileUpdate
+from app.services import (
+    adherence_service,
+    clinical_service,
+    message_service,
+    user_service,
+)
 
 router = APIRouter(prefix="/api/patient", tags=["patient"])
 
@@ -32,12 +38,7 @@ def get_patient_profile(
     return patient
 
 
-@router.get("/me", response_model=PatientMe)
-def me(
-    user: User = Depends(require_patient),
-    patient: Patient = Depends(get_patient_profile),
-    db: Session = Depends(get_db),
-) -> PatientMe:
+def _build_patient_me(db: Session, user: User, patient: Patient) -> PatientMe:
     doctor_name = None
     if patient.doctor_id is not None:
         doctor = db.get(User, patient.doctor_id)
@@ -53,6 +54,26 @@ def me(
         unread_messages=message_service.unread_count_for_patient(db, patient),
         adherence=adherence_service.get_status(db, patient.id),
     )
+
+
+@router.get("/me", response_model=PatientMe)
+def me(
+    user: User = Depends(require_patient),
+    patient: Patient = Depends(get_patient_profile),
+    db: Session = Depends(get_db),
+) -> PatientMe:
+    return _build_patient_me(db, user, patient)
+
+
+@router.patch("/me", response_model=PatientMe)
+def update_me(
+    data: PatientProfileUpdate,
+    user: User = Depends(require_patient),
+    patient: Patient = Depends(get_patient_profile),
+    db: Session = Depends(get_db),
+) -> PatientMe:
+    user_service.update_patient_profile(db, user, patient, data)
+    return _build_patient_me(db, user, patient)
 
 
 @router.get("/adherence/questions", response_model=QuestionnaireDefinition)

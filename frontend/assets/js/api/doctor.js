@@ -1,5 +1,8 @@
 import { apiFetch } from "./client.js";
 
+export const getMe = () => apiFetch("/api/doctor/me");
+export const updateMe = (data) =>
+  apiFetch("/api/doctor/me", { method: "PATCH", body: JSON.stringify(data) });
 export const getRegisteredPatients = () => apiFetch("/api/doctor/registered-patients");
 export const addPatient = (patientId) =>
   apiFetch(`/api/doctor/patients/${patientId}/add`, { method: "POST" });

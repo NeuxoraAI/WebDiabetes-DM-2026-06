@@ -4,16 +4,61 @@ from sqlalchemy.orm import Session
 
 from app.dependencies.auth import require_role
 from app.dependencies.db import get_db
-from app.models import Patient, User, UserRole
+from app.models import Doctor, Patient, User, UserRole
 from app.schemas.adherence import QuestionnaireOut
 from app.schemas.clinical_record import ClinicalRecordCreate, ClinicalRecordOut
 from app.schemas.doctor import MyPatientItem, PatientDetail, RegisteredPatientItem
 from app.schemas.message import InboxItem, MessageCreate, MessageOut
-from app.services import adherence_service, clinical_service, message_service
+from app.schemas.profile import DoctorMe, DoctorProfileUpdate
+from app.services import (
+    adherence_service,
+    clinical_service,
+    message_service,
+    user_service,
+)
 
 router = APIRouter(prefix="/api/doctor", tags=["doctor"])
 
 require_doctor = require_role(UserRole.doctor)
+
+
+def get_doctor_profile(
+    user: User = Depends(require_doctor), db: Session = Depends(get_db)
+) -> Doctor:
+    doctor = db.scalars(select(Doctor).where(Doctor.user_id == user.id)).first()
+    if doctor is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Perfil de médico no encontrado"
+        )
+    return doctor
+
+
+def _build_doctor_me(user: User, doctor: Doctor) -> DoctorMe:
+    return DoctorMe(
+        doctor_id=doctor.id,
+        full_name=user.full_name,
+        email=user.email,
+        cedula_profesional=doctor.cedula_profesional,
+    )
+
+
+@router.get("/me", response_model=DoctorMe)
+def me(
+    user: User = Depends(require_doctor),
+    doctor: Doctor = Depends(get_doctor_profile),
+) -> DoctorMe:
+    return _build_doctor_me(user, doctor)
+
+
+@router.patch("/me", response_model=DoctorMe)
+def update_me(
+    data: DoctorProfileUpdate,
+    user: User = Depends(require_doctor),
+    doctor: Doctor = Depends(get_doctor_profile),
+    db: Session = Depends(get_db),
+) -> DoctorMe:
+    user_service.update_doctor_profile(db, user, doctor, data)
+    return _build_doctor_me(user, doctor)
 
 
 def get_owned_patient(

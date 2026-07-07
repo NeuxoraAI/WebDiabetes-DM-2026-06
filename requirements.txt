@@ -1,3 +1,13 @@
-# Vercel instala desde la raíz. Reutilizamos las dependencias del backend
-# como única fuente de verdad.
--r backend/requirements.txt
+# Dependencias de runtime para el deploy en Vercel.
+# Mantener sincronizado con backend/requirements.txt (sin las deps de test).
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+sqlalchemy==2.0.41
+alembic==1.16.1
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.4.0
+bcrypt==4.3.0
+python-dotenv==1.1.0
+python-dateutil==2.9.0.post0
+psycopg2-binary==2.9.10
+email-validator==2.2.0
